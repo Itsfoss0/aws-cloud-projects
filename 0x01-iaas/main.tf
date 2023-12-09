@@ -1,23 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.30.0"
-    }
-  }
-  backend "remote" {
-   organization = "itsfoss0-aws-projects"
-   workspaces {
-     name = "dev-state"
-   }
-  }
-}
-
-provider "aws" {
-  region = "us-west-2"
-}
-
-
 resource "aws_vpc" "web_vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
@@ -128,12 +108,11 @@ resource "aws_instance" "server" {
   vpc_security_group_ids = [aws_security_group.webserver-sg.id]
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public_subnet.id
-  user_data = "${file("user-data-nginx-dev.sh")}"
+  user_data              = file("user-data-nginx-dev.sh")
 
   tags = {
     Name      = "Server"
     Terraform = "True"
   }
 }
-
 
