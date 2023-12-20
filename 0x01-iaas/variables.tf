@@ -13,3 +13,22 @@ variable "ami_id" {
   type = string
   default = "ami-0efcece6bed30fd98"
 }
+
+# storage s3
+
+variable "s3_tags" {
+  description = "S3 tags"
+  type = map(string)
+  default = {
+    "Name" = "Profile images storage"
+    "Env" = "Production"
+    "Owner" = "Itsfoss0"
+  }
+
+}
+
+variable "s3_bucket_name" {
+  description = "S3 Bucket Name"
+  type = string
+  default = "value"
+}
