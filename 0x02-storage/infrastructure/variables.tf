@@ -91,3 +91,19 @@ variable "az_one_b" {
   default     = "us-west-2b"
 }
 
+
+## S3 storage
+variable "s3_bucket_name" {
+  type = string
+  description = "S3 bucket name"
+}
+
+variable "s3_object_key" {
+  type  = string
+  description = "object key"
+}
+
+variable "s3_bucket_tags" {
+    type = map(string)
+    description = "S3 tags"
+}
