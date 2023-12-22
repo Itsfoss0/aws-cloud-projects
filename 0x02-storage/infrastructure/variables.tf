@@ -1,8 +1,21 @@
+variable "vpc_cidr_block" {
+  type = string
+  description = "VPC CIDR block"
+  default = "10.0.0.0/16"
+}
+
+variable "subnet_cidr_blocks" {
+  type = list(string)
+  description = "Subnet CIDR block ranges"
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+
 variable "vpc_tags" {
   type = map(string)
   default = {
-    "Name": "Default VPC"
-    "env" = "staging"
+    "Name" : "Default VPC"
+    "env"   = "staging"
     "owner" = "itsfoss0"
   }
 }
@@ -10,8 +23,8 @@ variable "vpc_tags" {
 variable "rds_sg_tags" {
   type = map(string)
   default = {
-    "Name": "RDS Security Group"
-    "env" = "staging"
+    "Name" : "RDS Security Group"
+    "env"   = "staging"
     "owner" = "itsfoss0"
   }
 }
@@ -19,8 +32,8 @@ variable "rds_sg_tags" {
 variable "web_sg_tags" {
   type = map(string)
   default = {
-    "Name": "Web Server Security Group"
-    "env" = "staging"
+    "Name" : "Web Server Security Group"
+    "env"   = "staging"
     "owner" = "itsfoss0"
   }
 }
@@ -28,35 +41,53 @@ variable "web_sg_tags" {
 
 variable "db_engine" {
   description = "Database engine (mysql)"
-  type = string
+  type        = string
 }
 
 variable "db_name_identifier" {
   description = "DB instance identifier on the dashboard"
-  type = string
+  type        = string
 }
 
 variable "db_user_name" {
   description = "Database username"
-  type = string
+  type        = string
 }
 
 variable "db_password" {
   description = "Database master password"
-  type = string
+  type        = string
 }
 
+variable "db_name" {
+  type        = string
+  description = "Database name"
+  default     = "application"
+}
 variable "instance_class" {
   description = "Database instance type"
-  type = string
+  type        = string
 }
 
 variable "db_engine_version" {
   description = "MySQL version"
-  type = string
+  type        = string
 }
 
 variable "allocated_storage" {
   description = "Needed storage"
-  type = number
+  type        = number
 }
+
+variable "az_one_a" {
+  type        = string
+  description = "First Availability Zone"
+  default     = "us-west-2a"
+}
+
+variable "az_one_b" {
+  type        = string
+  description = "Second availability Zone"
+  default     = "us-west-2b"
+}
+
