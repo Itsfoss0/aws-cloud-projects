@@ -1,3 +1,6 @@
 .vscode/
-*/.terraform
-*/*.tfstate*
+**/.terraform
+**/*.tfvars*
+**/*.tfstate*
+**/.env
+**/__pycache__/*
