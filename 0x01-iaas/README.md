@@ -1,1 +1,0 @@
-## IAAS  service offerings 
