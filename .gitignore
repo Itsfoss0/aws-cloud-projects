@@ -4,3 +4,4 @@
 **/*.tfstate*
 **/.env
 **/__pycache__/*
+**/*.pem
