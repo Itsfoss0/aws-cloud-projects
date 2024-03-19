@@ -1,5 +1,5 @@
 .vscode/
-**/.terraform
+**/.terraform*
 **/*.tfvars*
 **/*.tfstate*
 **/.env
