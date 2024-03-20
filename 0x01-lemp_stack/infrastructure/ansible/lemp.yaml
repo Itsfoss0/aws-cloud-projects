@@ -1,0 +1,60 @@
+---
+- hosts: server
+  become: true
+  tasks:
+    - name: Create an Nginx Server Block
+      blockinfile:
+        path: /etc/nginx/sites-available/projectlemp
+        create: true
+        block: |
+          server {
+              listen 80;
+              server_name projectlemp www.projectlemp;
+              root /var/www/projectlemp;
+
+              index index.html index.htm index.php;
+
+              location / {
+                  try_files $uri $uri/ =404;
+              }
+
+              location ~ \.php$ {
+                  include snippets/fastcgi-php.conf;
+                  fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+              }
+
+              location ~ /\.ht {
+                  deny all;
+              }
+          }
+
+
+    - name: Setup html index page
+      blockinfile:
+        path: /var/www/projectlemp/index.html
+        create: true
+        block: |
+          <h2> Hello from NGINX </h2>
+
+    - name: Load new nginx config
+      shell: |
+        sudo ln -s /etc/nginx/sites-available/projectlemp /etc/nginx/sites-enabled/; 
+      notify:
+        - restart nginx
+      register: output
+
+    - name: Log response to stdout
+      debug:
+        var: output.stdout
+    -
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: restart service
+      shell: |
+        sudo systemctl restart nginx
+      register: result
