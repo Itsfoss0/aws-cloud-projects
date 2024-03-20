@@ -49,11 +49,11 @@ resource "aws_security_group" "security_group" {
 }
 
 resource "aws_instance" "server" {
-  instance_type = var.ec2_instance_type
-  ami           = var.ami_id
-  key_name      = "web-server"
-  user_data     = file("../user-data.sh")
-  vpc_security_group_ids = [ aws_security_group.security_group.id ]
+  instance_type          = var.ec2_instance_type
+  ami                    = var.ami_id
+  key_name               = "web-server"
+  user_data              = file("../user-data.sh")
+  vpc_security_group_ids = [aws_security_group.security_group.id]
 
   tags = {
     "Name" = "Project Lamp Web Server",
@@ -63,8 +63,8 @@ resource "aws_instance" "server" {
 }
 
 resource "aws_eip" "static_ip" {
-  domain = "vpc"
-  instance                  = aws_instance.server.id
+  domain   = "vpc"
+  instance = aws_instance.server.id
 
   tags = {
     "Name" = "Project Lamp IP"
