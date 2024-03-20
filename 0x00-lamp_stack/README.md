@@ -2,7 +2,7 @@
 
 In this project, I deploy a LAMP stack application to AWS. Before we get into it, Lets quickly define what a LAMP stack application is.  LAMP is a web stack made up of Linux, Apache, MySQL, PHP or Python, or Perl
 
-This documentation is broken down into two sections, section one describes how to deploy manually, by doing lots of clicking and typing. What the ancestors called _clickops_, which is good for people just getting started. The second section uses automation concepts (IAC), we use terraform to provision the infrastructure and configure it with puppet. 
+This documentation is broken down into two sections, section one describes how to deploy manually, by doing lots of clicking and typing. What the ancestors called _clickops_, which is good for people just getting started. The second section uses automation concepts (IAC), we use terraform to provision the infrastructure and configure it with ansible. 
 
 
 ## Section 1 - Setting up manually. 
