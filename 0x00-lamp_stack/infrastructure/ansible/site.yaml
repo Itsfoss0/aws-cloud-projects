@@ -1,0 +1,63 @@
+---
+- hosts: server
+  become: true
+  tasks:
+    - name: Configure Apache Virtual Host
+      blockinfile:
+        path: /etc/apache2/sites-available/projectlamp.conf
+        create: true
+        block: |
+          <VirtualHost *:80>
+            ServerName projectlamp
+            ServerAlias www.projectlamp
+            ServerAdmin webmaster@localhost
+            DocumentRoot /var/www/projectlamp
+            ErrorLog ${APACHE_LOG_DIR}/error.log
+            CustomLog ${APACHE_LOG_DIR}/access.log combined
+          </VirtualHost>
+
+    - name: Setup html index page
+      blockinfile:
+        path: /var/www/projectlamp/index.html
+        create: true
+        block: |
+          <h2> Hello World </h2>
+
+    - name: Setup PHP index page
+      blockinfile:
+        path: /var/www/projectlamp/index.php
+        create: true
+        block: |
+          <?php
+            phpinfo();
+          ?>
+
+    - name: Configure PHP
+      copy:
+        content: |
+          <IfModule mod_dir.c>
+            DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+          </IfModule>
+        dest: /etc/apache2/mods-enabled/dir.conf
+        force: yes
+      notify:
+        - restart apache
+
+    - name: Enable Project LAMP site
+      shell: |
+        sudo a2ensite projectlamp; 
+        sudo a2dissite 000-default
+      notify:
+        - restart apache
+      register: output
+
+    - name: Log response to stdout
+      debug:
+        var: output.stdout
+    -
+
+  handlers:
+    - name: restart apache
+      service:
+        name: apache2
+        state: restarted
