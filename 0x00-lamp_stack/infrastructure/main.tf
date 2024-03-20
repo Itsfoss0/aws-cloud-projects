@@ -61,3 +61,12 @@ resource "aws_instance" "server" {
     "Env"  = "Staging"
   }
 }
+
+resource "aws_eip" "static_ip" {
+  domain = "vpc"
+  instance                  = aws_instance.server.id
+
+  tags = {
+    "Name" = "Project Lamp IP"
+  }
+}
