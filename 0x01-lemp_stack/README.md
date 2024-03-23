@@ -35,6 +35,7 @@ user@host:~ terraform apply -auto-aprove
 ```
 
 This might take a second, so grab your coffee as you wait. 
+
 ![coffee time](https://media3.giphy.com/media/M4ecx9P2jI4tq/200.webp?cid=790b7611c2aj80un91zrfnlyya9d8hq5enwcg79ptcstum6u&ep=v1_gifs_search&rid=200.webp&ct=g)
 
 
